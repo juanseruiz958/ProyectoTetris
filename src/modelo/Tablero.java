@@ -1,15 +1,5 @@
 package modelo;
 
-/**
- * Tablero corregido y robusto.
- * Mejora:
- *  - getCelda devuelve 0 si la consulta está fuera de límites (más seguro para la vista)
- *  - hayColision permanece clara (true = colisión)
- *  - se agrega posicionValida(Pieza) (conveniencia: true = la pieza cabe y NO colisiona)
- *  - eliminarLineasCompletas optimizado con System.arraycopy y control claro del índice
- *
- * NOTA: integra this.tablero.posicionValida(pieza) desde Juego al crear/colocar piezas.
- */
 public class Tablero {
 
     private int[][] grid;
@@ -29,10 +19,9 @@ public class Tablero {
                 grid[i][j] = 0;
     }
 
-    /**
-     * Devuelve true si la pieza colisiona con paredes, suelo o bloques fijos.
-     * (Se puede usar para saber si un movimiento provocaría colisión)
-     */
+
+     // Devuelve true si la pieza colisiona con paredes, suelo o bloques fijos.
+
     public boolean hayColision(Pieza pieza) {
         int[][] forma = pieza.getForma();
         int x = pieza.getX();
@@ -58,10 +47,9 @@ public class Tablero {
         return false;
     }
 
-    /**
-     * Conveniencia: devuelve true si la pieza EN SU POSICIÓN ACTUAL no colisiona.
-     * Útil para comprobar spawn inicial: if (!tablero.posicionValida(pieza)) -> gameOver
-     */
+
+      //Conveniencia: devuelve true si la pieza EN SU POSICIÓN ACTUAL no colisiona.
+
     public boolean posicionValida(Pieza pieza) {
         return !hayColision(pieza);
     }
@@ -87,10 +75,9 @@ public class Tablero {
         }
     }
 
-    /**
-     * Elimina líneas completas y devuelve cuántas se eliminaron.
-     * Implementación robusta y eficiente.
-     */
+
+      // Elimina líneas completas y devuelve cuántas se eliminaron.
+
     public int eliminarLineasCompletas() {
         int lineasCompletas = 0;
 
@@ -100,7 +87,7 @@ public class Tablero {
                 eliminarLinea(fila);
                 lineasCompletas++;
                 // después de eliminar, la fila actual tiene nueva información (fila-- en for)
-                // como copiamos desde arriba, debemos volver a revisar la misma fila
+                // como se copio desde arriba, se debe volver a revisar la misma fila
                 fila++; // esto compensa el decremento del for y provoca re-evaluar la fila
             }
         }
@@ -129,10 +116,10 @@ public class Tablero {
                 grid[i][j] = 0;
     }
 
-    /**
-     * Devuelve el valor de la celda; si está fuera de límites devuelve 0 (vacío).
-     * Esto evita que la vista o cualquier chequeo interprete -1 como "bloque".
-     */
+
+     // Devuelve el valor de la celda; si está fuera de límites devuelve 0 (vacío).
+     // Esto evita que la vista o cualquier chequeo interprete -1 como "bloque".
+
     public int getCelda(int fila, int columna) {
         if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas) {
             return grid[fila][columna];

@@ -15,6 +15,7 @@ public class VistaSwing extends JFrame {
     private PanelInfo panelInfo;
 
     private Timer timer;
+    private int nivelAnterior = 1;
 
     public VistaSwing() {
 
@@ -38,25 +39,25 @@ public class VistaSwing extends JFrame {
         pack();
 
         // CONTROLADOR TECLADO
-        ControladorTeclado teclado = new ControladorTeclado(controlador, panelTablero, panelInfo);
+        ControladorTeclado teclado = new ControladorTeclado(controlador, this);
         addKeyListener(teclado);
 
         setFocusable(true);
-        requestFocus();
+        requestFocusInWindow();
 
-        // TIMER
+        // INICIAR TIMER DEL JUEGO
         iniciarTimer();
 
         setVisible(true);
     }
 
-    // --------------------------------------------------------------------
-    // TIMER — baja la pieza automáticamente
-    // --------------------------------------------------------------------
+
+    // TIMER PRINCIPAL — BAJA LA PIEZA AUTOMÁTICAMENTE
+
     private void iniciarTimer() {
 
         int delay = Math.max(80, 550 - (juego.getNivel() * 40));
-        // mínimo 80 ms (rápido pero jugable)
+        nivelAnterior = juego.getNivel();
 
         timer = new Timer(delay, e -> {
 
@@ -66,7 +67,6 @@ public class VistaSwing extends JFrame {
                 panelTablero.repaint();
                 panelInfo.repaint();
 
-                // SOLO actualiza velocidad cuando el nivel cambia
                 actualizarVelocidadSiEsNecesario();
 
             } else {
@@ -80,19 +80,46 @@ public class VistaSwing extends JFrame {
         timer.start();
     }
 
-    // --------------------------------------------------------------------
-    // SOLO cuando cambia el nivel, se ajusta el timer
-    // --------------------------------------------------------------------
-    private int nivelAnterior = 1;
+
+    // ACTUALIZAR VELOCIDAD SI SUBE EL NIVEL
 
     private void actualizarVelocidadSiEsNecesario() {
         int nivelActual = juego.getNivel();
 
         if (nivelActual != nivelAnterior) {
+
             nivelAnterior = nivelActual;
 
             timer.stop();
-            iniciarTimer();  // cambia velocidad sin lag
+            iniciarTimer(); // recrea timer con nueva velocidad
         }
+    }
+
+
+    // REINICIAR JUEGO — CORRECCIÓN CRÍTICA
+
+    public void reiniciarJuegoCompleto() {
+
+        // Detener timer viejo
+        if (timer != null) {
+            timer.stop();
+            timer = null;
+        }
+
+        // Reiniciar modelo
+        controlador.reiniciarJuego();
+
+        // Reset nivel para que timer arranque con velocidad correcta
+        nivelAnterior = juego.getNivel();
+
+        // Reiniciar timer nuevo
+        iniciarTimer();
+
+        // Repintar pantalla
+        panelTablero.repaint();
+        panelInfo.repaint();
+
+        // Recuperar control del teclado
+        requestFocusInWindow();
     }
 }

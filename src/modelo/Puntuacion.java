@@ -25,7 +25,7 @@ public class Puntuacion {
         this.mejoresPuntuaciones = new ArrayList<>();
     }
 
-    // --- Actualiza al eliminar líneas ---------------------------------------------------
+    // Actualiza al eliminar líneas
 
     public void actualizarPorLineas(int lineas) {
         if (lineas <= 0) return;
@@ -46,7 +46,7 @@ public class Puntuacion {
         nivel = (lineasCompletadas / 10) + 1;
     }
 
-    // --- Guardar en ranking -------------------------------------------------------------
+    // Guardar en ranking
 
     public void guardarPuntuacion(String jugador) {
         if (jugador == null || jugador.trim().isEmpty()) return;
@@ -60,7 +60,7 @@ public class Puntuacion {
         }
     }
 
-    // --- Reiniciar ----------------------------------------------------------------------
+    // Reiniciar
 
     public void reiniciar() {
         puntuacionActual = 0;
@@ -68,7 +68,7 @@ public class Puntuacion {
         lineasCompletadas = 0;
     }
 
-    // --- Getters ------------------------------------------------------------------------
+    // Getters
 
     public int getPuntuacionActual() { return puntuacionActual; }
     public int getNivel() { return nivel; }
@@ -78,7 +78,7 @@ public class Puntuacion {
         return mejoresPuntuaciones;
     }
 
-    // --- Registro interno ---------------------------------------------------------------
+    // Registro interno
 
     public static class RegistroPuntos {
         public String jugador;

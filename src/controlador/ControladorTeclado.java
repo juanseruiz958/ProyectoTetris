@@ -1,7 +1,6 @@
 package controlador;
 
-import vista.PanelTablero;
-import vista.PanelInfo;
+import vista.VistaSwing;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,17 +8,12 @@ import java.awt.event.KeyListener;
 public class ControladorTeclado implements KeyListener {
 
     private ControladorJuego controlador;
-    private PanelTablero panelTablero;
-    private PanelInfo panelInfo;
+    private VistaSwing vista;
 
-    // Ahora recibe la vista también
-    public ControladorTeclado(ControladorJuego controlador,
-                              PanelTablero panelTablero,
-                              PanelInfo panelInfo) {
-
+    // Ahora recibe la vista directamente
+    public ControladorTeclado(ControladorJuego controlador, VistaSwing vista) {
         this.controlador = controlador;
-        this.panelTablero = panelTablero;
-        this.panelInfo = panelInfo;
+        this.vista = vista;
     }
 
     @Override
@@ -48,13 +42,13 @@ public class ControladorTeclado implements KeyListener {
                 break;
 
             case KeyEvent.VK_R:
-                controlador.reiniciarJuego();
-                break;
+                // Reinicio completo y correcto
+                vista.reiniciarJuegoCompleto();
+                return; // evitar repaints extra
         }
 
-        // 🔥 IMPORTANTÍSIMO: repintar inmediatamente
-        panelTablero.repaint();
-        panelInfo.repaint();
+        // Repintado tras cada acción
+        vista.repaint();
     }
 
     @Override public void keyTyped(KeyEvent e) {}

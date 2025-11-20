@@ -69,7 +69,7 @@ public class Pieza {
 
         // Posición inicial centrada
         this.x = 3;
-        this.y = -1; // empieza un poco más arriba para evitar recorte
+        this.y = -2; // empieza un poco más arriba para evitar recorte
     }
 
     // Constructor copia (útil para Next Piece)

@@ -35,9 +35,9 @@ public class Juego {
         }
     }
 
-    // --------------------------------------------------------------------
+
     // MOVIMIENTOS
-    // --------------------------------------------------------------------
+
 
     public void moverIzquierda() {
         if (gameOver) return;
@@ -105,10 +105,9 @@ public class Juego {
         return true;
     }
 
-    // --------------------------------------------------------------------
+
     // LÓGICA DEL JUEGO
     // --------------------------------------------------------------------
-
     private void generarNuevaPieza() {
         piezaActual = siguientesPiezas.poll();
         siguientesPiezas.offer(new Pieza()); // Nueva pieza aleatoria
@@ -120,9 +119,9 @@ public class Juego {
         }
     }
 
-    // --------------------------------------------------------------------
+
     // REINICIO
-    // --------------------------------------------------------------------
+
 
     public void reiniciar() {
         tablero.limpiar();
@@ -134,9 +133,9 @@ public class Juego {
         piezaActual = siguientesPiezas.poll();
     }
 
-    // --------------------------------------------------------------------
+
     // GETTERS
-    // --------------------------------------------------------------------
+
 
     public Tablero getTablero() { return tablero; }
     public Pieza getPiezaActual() { return piezaActual; }

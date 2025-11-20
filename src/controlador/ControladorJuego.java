@@ -10,9 +10,9 @@ public class ControladorJuego {
         this.juego = juego;
     }
 
-    // ----------------------------------------------------
-    // ACCIONES DEL USUARIO — Solo delega al modelo
-    // ----------------------------------------------------
+
+    // ACCIONES DEL USUARIO
+
 
     public void moverIzquierda() {
         if (!juego.isGameOver()) {
@@ -48,9 +48,9 @@ public class ControladorJuego {
         juego.reiniciar();
     }
 
-    // ----------------------------------------------------
+
     // GETTERS
-    // ----------------------------------------------------
+
 
     public Juego getJuego() {
         return juego;

@@ -68,7 +68,6 @@ public class PanelInfo extends JPanel {
 
     private void dibujarSiguientePieza(Graphics g, int y) {
 
-        // ⚠️ ***CORRECCIÓN IMPORTANTE***
         Pieza siguiente = new Pieza(juego.getSiguientesPiezas().peek());
         if (siguiente == null) return;
 

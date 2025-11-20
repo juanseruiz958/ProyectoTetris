@@ -42,7 +42,7 @@ public class PanelTablero extends JPanel {
         dibujarPiezaActual(g);
     }
 
-    // --------------------------- FONDO --------------------------
+    // FONDO
 
     private void dibujarFondo(Graphics g) {
         g.setColor(new Color(35, 35, 35));
@@ -61,7 +61,7 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // ---------------------- BLOQUES FIJOS -----------------------
+    // BLOQUES FIJOS
 
     private void dibujarBloquesFijos(Graphics g, Tablero tablero) {
 
@@ -76,7 +76,7 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // ------------------------ BLOQUE ----------------------------
+    //  BLOQUE
 
     private void dibujarCelda(Graphics g, int col, int fila, Color color) {
 
@@ -100,7 +100,7 @@ public class PanelTablero extends JPanel {
         g.drawRoundRect(x, y, TAM_CELDA - 4, TAM_CELDA - 4, 6, 6);
     }
 
-    // ------------------------ PIEZA ACTUAL ----------------------
+    // PIEZA ACTUAL
 
     private void dibujarPiezaActual(Graphics g) {
         Pieza pieza = juego.getPiezaActual();
@@ -123,7 +123,7 @@ public class PanelTablero extends JPanel {
         }
     }
 
-    // -------- TAMAÑO CORRECTO PARA QUE NO SE CORTEN LAS PIEZAS ---------
+    //TAMAÑO PARA QUE NO SE CORTEN LAS PIEZAS
 
     @Override
     public Dimension getPreferredSize() {
